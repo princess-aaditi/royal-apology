@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A royal apology for Aaditi</title>
+<meta property="og:title" content="👑 The Royal Court of Queen Aaditi">
+<meta property="og:description" content="Your Majesty, a case awaits your judgement.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shreekrishnaatri.github.io/royal-apology/">
+<meta property="og:image" content="https://shreekrishnaatri.github.io/royal-apology/preview.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Royal Court of Queen Aaditi: a case awaits your judgement">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#fde4ec">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#fde4ec; --panel:#fff7fa; --ink:#5b2140; --gold:#c93c72; --line:#f3a9c3;
+  --rose:#e0457b; --btn-ink:#ffffff;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#2d1020; --panel:#43192f; --ink:#ffe3ee; --gold:#ff9cc0; --line:#a34e73;
+    --rose:#ffb7d1; --btn-ink:#2d1020;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#2d1020; --panel:#43192f; --ink:#ffe3ee; --gold:#ff9cc0; --line:#a34e73;
+  --rose:#ffb7d1; --btn-ink:#2d1020;
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0;min-height:100%;background:var(--ground);color:var(--ink);
+  font-family:'Quicksand','Trebuchet MS',Verdana,sans-serif;font-weight:500;
+  font-size:18px;line-height:1.45;
+  display:flex;justify-content:center;align-items:center;overflow-x:hidden;
+}
+.court{width:100%;max-width:440px;padding:16px}
+.inner{
+  background:var(--panel);border:2px solid var(--line);border-radius:26px;
+  padding:22px 20px 24px;text-align:center;min-height:540px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.round{font-family:'Fredoka','Trebuchet MS',sans-serif;font-size:14px;color:var(--gold);min-height:22px;margin-bottom:6px}
+.step{display:none}
+.step.on{display:block}
+h1,h2{font-family:'Fredoka','Trebuchet MS',sans-serif;font-weight:600;color:var(--gold);margin:0 0 10px;line-height:1.2}
+h1{font-size:29px}
+h2{font-size:25px}
+h1:focus,h2:focus{outline:none}
+p{margin:0 0 12px}
+.big{font-size:54px;line-height:1;margin-bottom:8px}
+.btn{
+  font-family:'Fredoka','Trebuchet MS',sans-serif;font-weight:600;font-size:18px;
+  min-height:50px;padding:12px 24px;border:0;border-radius:999px;cursor:pointer;
+  background:var(--gold);color:var(--btn-ink);
+}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:focus-visible,.heart:focus-visible,.pick:focus-visible,#bonk:focus-visible,input:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.btn[hidden]{display:none}
+.next{margin-top:14px}
+
+/* mood slider */
+.mood{background:var(--ground);border-radius:18px;padding:12px 14px;margin:6px 0 4px}
+.mood label{display:block;font-weight:700;margin-bottom:6px}
+.mood input{width:100%;accent-color:var(--gold);height:32px}
+.moodout{font-family:'Fredoka','Trebuchet MS',sans-serif;font-size:19px;min-height:28px}
+
+/* bonk */
+#bonk{
+  width:150px;height:150px;border-radius:50%;border:3px dashed var(--line);background:var(--ground);
+  font-size:78px;line-height:1;cursor:pointer;padding:0;margin:8px 0 6px;touch-action:manipulation;
+}
+#bonk.hit{animation:wob .28s}
+@keyframes wob{0%{transform:rotate(0) scale(1)}35%{transform:rotate(-14deg) scale(.9)}70%{transform:rotate(10deg) scale(1.05)}100%{transform:rotate(0) scale(1)}}
+.count{font-family:'Fredoka','Trebuchet MS',sans-serif;color:var(--gold);font-size:17px}
+.ouch{min-height:54px;font-weight:700;font-size:20px;margin-top:6px}
+
+/* hearts */
+.hearts{display:flex;justify-content:center;gap:8px;margin:12px 0 8px}
+.heart{
+  width:54px;height:54px;border-radius:50%;border:2px solid var(--line);background:var(--ground);
+  font-size:26px;cursor:pointer;line-height:1;padding:0;transition:transform .2s;
+}
+.heart.open{transform:scale(.82);opacity:.55;cursor:default}
+.said{list-style:none;margin:0;padding:0;min-height:170px;text-align:left}
+.said li{padding:8px 12px;background:var(--ground);border-radius:14px;margin-bottom:8px;font-weight:600}
+
+/* sentence */
+.picks{display:flex;flex-direction:column;gap:9px;margin:12px 0 10px}
+.pick{
+  font-family:inherit;font-weight:600;font-size:17px;text-align:left;padding:11px 16px;min-height:48px;cursor:pointer;
+  background:var(--ground);color:var(--ink);border:2px solid var(--line);border-radius:16px;
+}
+.pick[aria-pressed="true"]{background:var(--gold);color:var(--btn-ink);border-color:var(--gold)}
+.own{text-align:left;margin-top:4px}
+.own label{display:block;font-weight:700;margin-bottom:6px}
+.own input{
+  width:100%;font-family:inherit;font-weight:600;font-size:17px;padding:12px 14px;min-height:48px;
+  border:2px solid var(--line);border-radius:16px;background:var(--panel);color:var(--ink);
+}
+.own input::placeholder{color:var(--ink);opacity:.55}
+.sorrybox{display:none;max-height:86px;overflow:auto;border:2px dashed var(--line);border-radius:14px;padding:8px 10px;font-size:15px;text-align:left;margin-bottom:10px}
+.sorrybox.on{display:block}
+
+/* scratch */
+.scratch{position:relative;width:100%;aspect-ratio:5/3;border:2px solid var(--line);border-radius:18px;margin:12px 0 10px;background:var(--ground);overflow:hidden}
+.prize{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:10px}
+.prize .t{font-family:'Fredoka','Trebuchet MS',sans-serif;font-weight:600;font-size:24px;color:var(--gold)}
+.prize .w{font-weight:700;font-size:19px;margin-top:6px}
+.prize .s{font-size:15px;margin-top:6px}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
+
+/* verdict */
+.arena{position:relative;height:230px;margin-top:6px}
+#yes{position:absolute;left:50%;top:34px;transform:translateX(-50%) scale(1);transition:transform .25s;white-space:nowrap}
+#no{position:absolute;left:50%;top:140px;transform:translateX(-50%);transition:left .18s,top .18s;white-space:nowrap}
+.tease{min-height:28px;color:var(--rose);font-weight:700}
+
+/* quiz */
+.qq{font-family:'Fredoka','Trebuchet MS',sans-serif;font-size:21px;font-weight:600;min-height:56px}
+.pick.wrong{animation:wob .28s}
+
+/* wheel */
+.wheelwrap{position:relative;width:240px;height:240px;margin:8px auto 8px}
+#wheel{width:100%;height:100%;display:block;transition:transform 3.2s cubic-bezier(.17,.67,.2,1)}
+#wheel .a{fill:var(--gold)}
+#wheel .b{fill:var(--ground)}
+#wheel .rim{fill:none;stroke:var(--line);stroke-width:3}
+#wheel text{font-family:'Fredoka','Trebuchet MS',sans-serif;font-weight:600;font-size:9px}
+#wheel .ta{fill:var(--btn-ink)}
+#wheel .tb{fill:var(--ink)}
+.pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:12px solid transparent;border-right:12px solid transparent;border-top:24px solid var(--ink);z-index:2}
+
+/* certificate */
+.cert{border:4px double var(--gold);border-radius:18px;padding:16px 14px 14px;margin-bottom:14px}
+.signs{display:flex;justify-content:space-around;gap:12px;margin-top:14px}
+.signs div{display:flex;flex-direction:column;align-items:center;min-width:110px}
+.sig{font-family:'Fredoka','Trebuchet MS',sans-serif;font-weight:600;font-size:21px;color:var(--gold);border-bottom:2px solid var(--line);padding:0 10px 2px;width:100%}
+.cap{font-size:13px;font-weight:700;margin-top:4px}
+.certdate{font-size:14px;font-weight:700;margin-top:12px}
+
+/* pardon */
+.decree{text-align:left;border:2px solid var(--line);background:var(--ground);border-radius:18px;padding:12px 14px;margin:12px 0}
+.decree ul{margin:6px 0 0;padding-left:20px}
+.decree li{overflow-wrap:anywhere}
+.fall{position:fixed;top:-40px;font-size:24px;pointer-events:none;animation:fall linear forwards;z-index:5}
+@keyframes fall{to{transform:translateY(110vh) rotate(340deg)}}
+@media (prefers-reduced-motion: reduce){
+  .heart,#yes,#no{transition:none}
+  #bonk.hit,.pick.wrong{animation:none}
+  #wheel{transition:none}
+  .fall{display:none}
+}
+</style>
+</head>
+<body>
+<main class="court">
+<div class="inner">
+<div class="round" id="round" aria-live="polite"></div>
+
+<section class="step on" id="s0">
+  <div class="big" aria-hidden="true">👑</div>
+  <h1>The Royal Court of Queen Aaditi</h1>
+  <p>Your Majesty, a case awaits your judgement.</p>
+  <p><strong>The accused:</strong> Shree<br><strong>The charge:</strong> being silly and upsetting the Queen</p>
+  <div class="mood">
+    <label for="mood">How upset is Her Majesty right now?</label>
+    <input type="range" id="mood" min="1" max="5" step="1" value="3">
+    <div class="moodout" id="moodout" aria-live="polite"></div>
+  </div>
+  <button class="btn next" data-go="1">Open the court</button>
+</section>
+
+<section class="step" id="s1">
+  <h2>First, bonk the accused</h2>
+  <p>Royal law allows 10 bonks before the hearing. Tap his face.</p>
+  <button id="bonk" type="button" aria-label="Bonk Shree">🙂</button>
+  <div class="count" id="bonkcount" aria-live="polite">Bonks: 0 of 10</div>
+  <div class="ouch" id="ouch" aria-live="polite"></div>
+  <button class="btn next" id="toHearts" data-go="2" hidden>Let him speak</button>
+</section>
+
+<section class="step" id="s2">
+  <h2>The accused wishes to speak</h2>
+  <p>Tap each heart to hear him out.</p>
+  <div class="hearts" id="hearts"></div>
+  <ul class="said" id="said" aria-live="polite"></ul>
+  <button class="btn next" id="toSentence" data-go="3" hidden>Take the Queen’s quiz</button>
+</section>
+
+<section class="step" id="s3">
+  <h2>The Queen’s quiz</h2>
+  <p id="qnum"></p>
+  <p class="qq" id="qq"></p>
+  <div class="picks" id="qopts"></div>
+  <div class="ouch" id="qsay" aria-live="polite"></div>
+  <button class="btn next" id="toSentence2" data-go="4" hidden>Choose his sentence</button>
+</section>
+
+<section class="step" id="s4">
+  <h2>Choose his sentence</h2>
+  <p>Pick as many as you like. He has no right to appeal.</p>
+  <div class="picks" id="picks"></div>
+  <div class="sorrybox" id="sorrybox" aria-live="off"></div>
+  <div class="own">
+    <label for="own">Or write your own sentence</label>
+    <input type="text" id="own" maxlength="90" autocomplete="off" placeholder="Shree must…">
+  </div>
+  <button class="btn next" data-go="5">Pass the sentence</button>
+</section>
+
+<section class="step" id="s5">
+  <h2>Spin the royal wheel</h2>
+  <p>One bonus ruling, decided by fate. Spin as often as you like. The last spin counts.</p>
+  <div class="wheelwrap">
+    <div class="pointer" aria-hidden="true"></div>
+    <svg id="wheel" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+  </div>
+  <div class="ouch" id="wsay" aria-live="polite"></div>
+  <button class="btn" id="spin" type="button">Spin the wheel</button>
+  <div><button class="btn next" id="toScratch" data-go="6" hidden>See his peace offering</button></div>
+</section>
+
+<section class="step" id="s6">
+  <h2>A peace offering</h2>
+  <p>The accused has left something for Your Majesty. Scratch to reveal it.</p>
+  <div class="scratch">
+    <div class="prize">
+      <div class="t">Shree Coupon</div>
+      <div class="w">Any wish for my beloved lady</div>
+      <div class="s">Valid once. Redeem at your command.</div>
+    </div>
+    <canvas id="foil" aria-label="Scratch card. Drag across it to reveal the gift."></canvas>
+  </div>
+  <button class="btn ghost" id="reveal">Reveal it for me</button>
+  <div><button class="btn next" id="toVerdict" data-go="7" hidden>Give the verdict</button></div>
+</section>
+
+<section class="step" id="s7">
+  <h2>The final verdict</h2>
+  <p>Does Her Majesty forgive Shree?</p>
+  <div class="tease" id="tease" aria-live="polite"></div>
+  <div class="arena" id="arena">
+    <button class="btn" id="yes">Yes, forgiven</button>
+    <button class="btn ghost" id="no">No</button>
+  </div>
+</section>
+
+<section class="step" id="s8">
+  <div class="cert">
+    <div class="big" aria-hidden="true">💗</div>
+    <h1>Certificate of Royal Pardon</h1>
+    <p>This certifies that <strong>Shree</strong> has been fully forgiven by <strong>Queen Aaditi</strong>, kindest ruler in the land.</p>
+    <p id="moodline"></p>
+    <div class="decree">
+      <strong>By royal decree, Shree owes you:</strong>
+      <ul id="owed"></ul>
+    </div>
+    <p><strong>I’m sorry, Aaditi. Your smile matters more to me than being right.</strong></p>
+    <div class="signs">
+      <div><span class="sig">Aaditi</span><span class="cap">The Queen</span></div>
+      <div><span class="sig">Shree</span><span class="cap">The accused</span></div>
+    </div>
+    <div class="certdate" id="certdate"></div>
+  </div>
+  <p>Screenshot this certificate and send it to him, so he can breathe again.</p>
+  <button class="btn ghost" id="again">Play again</button>
+</section>
+
+</div>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(id){ return document.getElementById(id); };
+
+  function show(n){
+    var steps = document.querySelectorAll('.step');
+    for (var i=0;i<steps.length;i++) steps[i].classList.toggle('on', steps[i].id === 's'+n);
+    $('round').textContent = (n >= 1 && n <= 7) ? 'Round ' + n + ' of 7' : '';
+    window.scrollTo(0,0);
+    if (n === 6) setupFoil();
+    if (n === 8) pardon();
+    var h = document.querySelector('#s'+n+' h1, #s'+n+' h2');
+    if (h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+  }
+  document.addEventListener('click', function(e){
+    var b = e.target.closest('[data-go]');
+    if (b) show(parseInt(b.getAttribute('data-go'),10));
+  });
+
+  /* Step 0: mood */
+  var moods = ['Barely annoyed 😌','A little upset 😐','Properly upset 😤','Do not talk to me 😠','Royal fury 🔥'];
+  function moodNow(){ return moods[parseInt($('mood').value,10) - 1]; }
+  function paintMood(){ $('moodout').textContent = moodNow(); }
+  $('mood').addEventListener('input', paintMood);
+
+  /* Step 1: bonk */
+  var bonks = 0;
+  var faces = ['🙂','😬','😣','😵‍💫','🤕'];
+  var ouches = [
+    'Ouch!', 'I deserved that.', 'Sorry, sorry!', 'Okay, that one hurt.', 'Still sorry!',
+    'Fair enough.', 'My ego felt that.', 'Yes ma’am.', 'Lesson is loading…', 'Fully bonked. Fully sorry.'
+  ];
+  function resetBonk(){
+    bonks = 0; $('bonk').textContent = faces[0];
+    $('bonkcount').textContent = 'Bonks: 0 of 10'; $('ouch').textContent = ''; $('toHearts').hidden = true;
+  }
+  $('bonk').addEventListener('click', function(){
+    var b = $('bonk');
+    bonks++;
+    b.classList.remove('hit'); void b.offsetWidth; b.classList.add('hit');
+    if (navigator.vibrate) { try{ navigator.vibrate(30); }catch(_){} }
+    if (bonks <= 10){
+      b.textContent = faces[Math.min(Math.floor((bonks - 1) / 2), faces.length - 1)];
+      $('bonkcount').textContent = 'Bonks: ' + bonks + ' of 10';
+      $('ouch').textContent = ouches[bonks - 1];
+      if (bonks === 10) $('toHearts').hidden = false;
+    } else {
+      $('bonkcount').textContent = 'Bonus bonks: ' + (bonks - 10);
+      $('ouch').textContent = 'A bonus bonk? He accepts it with love.';
+    }
+  });
+
+  /* Step 2: hearts */
+  var lines = [
+    'I was being a fool. A cute one, but still a fool.',
+    'You’re upset, and I hate being the reason.',
+    'A day with you upset feels twice as long.',
+    'Your smile matters more to me than being right.',
+    'I promise to listen first and talk later.'
+  ];
+  var heard = 0;
+  function buildHearts(){
+    var box = $('hearts'); box.textContent = ''; $('said').textContent = ''; heard = 0;
+    $('toSentence').hidden = true;
+    lines.forEach(function(text, i){
+      var b = document.createElement('button');
+      b.className = 'heart'; b.type = 'button'; b.textContent = '💗';
+      b.setAttribute('aria-label', 'Heart ' + (i+1) + ' of 5');
+      b.addEventListener('click', function(){
+        if (b.classList.contains('open')) return;
+        b.classList.add('open'); b.textContent = '🤍'; b.disabled = true;
+        var li = document.createElement('li'); li.textContent = text; $('said').appendChild(li);
+        heard++;
+        if (heard === lines.length) $('toSentence').hidden = false;
+      });
+      box.appendChild(b);
+    });
+  }
+
+  /* Sentence round */
+  var options = [
+    '🍫 Chocolates of your choice',
+    '👂 One hour of listening, zero interruptions',
+    '🍝 A dinner date, his treat',
+    '✍️ Writes “sorry” 100 times, right now'
+  ];
+  var chosen = {};
+  var sorryTimer = null;
+  function buildPicks(){
+    var box = $('picks'); box.textContent = ''; chosen = {};
+    $('sorrybox').classList.remove('on'); $('sorrybox').textContent = ''; $('own').value = '';
+    options.forEach(function(text, i){
+      var b = document.createElement('button');
+      b.className = 'pick'; b.type = 'button'; b.textContent = text;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', function(){
+        var on = b.getAttribute('aria-pressed') !== 'true';
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        chosen[i] = on;
+        if (i === 3 && on) writeSorry();
+      });
+      box.appendChild(b);
+    });
+  }
+  function writeSorry(){
+    var box = $('sorrybox'); box.classList.add('on'); box.textContent = '';
+    clearInterval(sorryTimer);
+    var done = ' Done. My hand hurts. Worth it.';
+    if (reduce){ box.textContent = new Array(101).join('sorry ') + done; return; }
+    var n = 0;
+    sorryTimer = setInterval(function(){
+      n++; box.textContent += 'sorry ';
+      box.scrollTop = box.scrollHeight;
+      if (n >= 100){ clearInterval(sorryTimer); box.textContent += done; box.scrollTop = box.scrollHeight; }
+    }, 25);
+  }
+
+  /* Scratch card round */
+  var foilReady = false, scratching = false;
+  function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function setupFoil(){
+    var c = $('foil');
+    if (foilReady) return;
+    var w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) return;
+    c.width = w; c.height = h;
+    var g = c.getContext('2d');
+    g.fillStyle = css('--gold') || '#c93c72'; g.fillRect(0,0,w,h);
+    g.fillStyle = css('--btn-ink') || '#ffffff';
+    g.font = '600 20px Fredoka, "Trebuchet MS", sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText('Scratch here 💝', w/2, h/2);
+    foilReady = true;
+    function at(e){ var r = c.getBoundingClientRect(); return {x:e.clientX - r.left, y:e.clientY - r.top}; }
+    function rub(e){
+      var p = at(e);
+      g.globalCompositeOperation = 'destination-out';
+      g.beginPath(); g.arc(p.x, p.y, 24, 0, Math.PI*2); g.fill();
+    }
+    c.addEventListener('pointerdown', function(e){ scratching = true; try{ c.setPointerCapture(e.pointerId); }catch(_){} rub(e); e.preventDefault(); });
+    c.addEventListener('pointermove', function(e){ if (scratching){ rub(e); e.preventDefault(); } });
+    function stop(){ if (!scratching) return; scratching = false; check(); }
+    c.addEventListener('pointerup', stop); c.addEventListener('pointercancel', stop);
+    function check(){
+      try{
+        var d = g.getImageData(0,0,c.width,c.height).data, clear = 0, total = 0;
+        for (var i=3;i<d.length;i+=64){ total++; if (d[i] === 0) clear++; }
+        if (clear/total > 0.45) revealAll();
+      }catch(_){ revealAll(); }
+    }
+  }
+  function revealAll(){
+    $('foil').style.display = 'none';
+    $('reveal').hidden = true;
+    $('toVerdict').hidden = false;
+  }
+  $('reveal').addEventListener('click', revealAll);
+
+  /* Verdict round */
+  var teases = [
+    'Nice try, Your Majesty.',
+    'The “No” button is under royal protection.',
+    'It seems to be shy today.',
+    'Even the button is on his side.',
+    'Look how big “Yes” is getting.',
+    'Fine. The button surrenders.'
+  ];
+  var dodges = 0, surrenderAt = 0;
+  function dodge(e){
+    if ($('no').dataset.done) return;
+    if (e){ e.preventDefault(); }
+    var arena = $('arena'), no = $('no'), yes = $('yes');
+    dodges++;
+    $('tease').textContent = teases[Math.min(dodges, teases.length) - 1];
+    yes.style.transform = 'translateX(-50%) scale(' + Math.min(1 + dodges*0.1, 1.5) + ')';
+    if (dodges >= teases.length){
+      no.textContent = 'Okay, yes'; no.dataset.done = '1'; surrenderAt = Date.now();
+      no.style.transform = 'translateX(-50%)'; no.style.left = '50%'; no.style.top = '150px';
+      return;
+    }
+    var maxX = arena.clientWidth - no.offsetWidth, maxY = arena.clientHeight - no.offsetHeight;
+    var x = Math.random()*maxX, y = 110 + Math.random()*Math.max(maxY - 110, 10);
+    no.style.transform = 'none'; no.style.left = x + 'px'; no.style.top = y + 'px';
+  }
+  $('no').addEventListener('pointerdown', function(e){ if (!$('no').dataset.done) dodge(e); });
+  $('no').addEventListener('click', function(e){
+    if ($('no').dataset.done){ if (Date.now() - surrenderAt > 500) show(8); } else if (e.detail === 0) dodge(e);
+  });
+  $('yes').addEventListener('click', function(){ show(8); });
+
+  /* Quiz round */
+  var quiz = [
+    {q:'Who is always right?', o:[
+      ['Shree', false, 'The whole court is laughing. Try again.'],
+      ['The Queen', true, 'Correct, obviously.'],
+      ['Google', false, 'Even Google checks with the Queen first.']]},
+    {q:'What should Shree do when the Queen is upset?', o:[
+      ['Explain why he’s right', false, 'That is exactly how he got here.'],
+      ['Hide until it’s over', false, 'Tempting, but no.'],
+      ['Listen and say sorry', true, 'He is taking notes.']]},
+    {q:'Who is the luckiest person in this court?', o:[
+      ['Shree, because he has Aaditi', true, 'He agrees, loudly.'],
+      ['The “No” button', false, 'It hasn’t even shown up yet.'],
+      ['The chocolates', false, 'They are doomed, actually.']]}
+  ];
+  var qi = 0, qTimer = null;
+  function paintQuiz(){
+    var opts = $('qopts'); opts.textContent = ''; $('qsay').textContent = '';
+    if (qi >= quiz.length){
+      $('qnum').textContent = 'Quiz complete';
+      $('qq').textContent = 'Full marks, Your Majesty. As expected.';
+      $('toSentence2').hidden = false;
+      return;
+    }
+    $('toSentence2').hidden = true;
+    $('qnum').textContent = 'Question ' + (qi + 1) + ' of ' + quiz.length;
+    $('qq').textContent = quiz[qi].q;
+    quiz[qi].o.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'pick'; b.type = 'button'; b.textContent = o[0];
+      b.addEventListener('click', function(){
+        $('qsay').textContent = o[2];
+        if (o[1]){
+          b.setAttribute('aria-pressed','true');
+          var all = opts.querySelectorAll('button');
+          for (var k=0;k<all.length;k++) all[k].disabled = true;
+          clearTimeout(qTimer);
+          qTimer = setTimeout(function(){ qi++; paintQuiz(); }, 1300);
+        } else {
+          b.classList.remove('wrong'); void b.offsetWidth; b.classList.add('wrong');
+        }
+      });
+      opts.appendChild(b);
+    });
+  }
+  function resetQuiz(){ clearTimeout(qTimer); qi = 0; paintQuiz(); }
+
+  /* Wheel round */
+  var prizes = [
+    ['Foot massage', '💆 A foot massage'],
+    ['Movie pick', '🎬 Movie night, your pick'],
+    ['Sings a song', '🎤 He sings you a song on a voice note'],
+    ['Ice cream run', '🍦 An ice cream run'],
+    ['Compliments', '💌 A full day of compliments'],
+    ['Long drive', '🚗 A long drive, your playlist']
+  ];
+  var wheelResult = '', turns = 0, spinning = false;
+  function buildWheel(){
+    var NS = 'http://www.w3.org/2000/svg', w = $('wheel');
+    while (w.firstChild) w.removeChild(w.firstChild);
+    var n = prizes.length, step = 360 / n, R = 96;
+    function pt(deg){ var r = deg * Math.PI / 180; return (R * Math.sin(r)).toFixed(2) + ' ' + (-R * Math.cos(r)).toFixed(2); }
+    prizes.forEach(function(p, i){
+      var path = document.createElementNS(NS, 'path');
+      path.setAttribute('d', 'M0 0 L' + pt(i * step) + ' A' + R + ' ' + R + ' 0 0 1 ' + pt((i + 1) * step) + ' Z');
+      path.setAttribute('class', i % 2 ? 'b' : 'a');
+      w.appendChild(path);
+      var t = document.createElementNS(NS, 'text');
+      t.setAttribute('transform', 'rotate(' + (i * step + step / 2 - 90) + ')');
+      t.setAttribute('x', '28'); t.setAttribute('y', '3');
+      t.setAttribute('class', i % 2 ? 'tb' : 'ta');
+      t.textContent = p[0];
+      w.appendChild(t);
+    });
+    var rim = document.createElementNS(NS, 'circle');
+    rim.setAttribute('r', R); rim.setAttribute('class', 'rim'); w.appendChild(rim);
+  }
+  function resetWheel(){
+    wheelResult = ''; turns = 0; spinning = false;
+    $('wheel').style.transform = 'rotate(0deg)'; $('wsay').textContent = '';
+    $('spin').disabled = false; $('spin').textContent = 'Spin the wheel'; $('toScratch').hidden = true;
+  }
+  $('spin').addEventListener('click', function(){
+    if (spinning) return;
+    spinning = true; $('spin').disabled = true; $('wsay').textContent = 'Spinning…';
+    var n = prizes.length, step = 360 / n, k = Math.floor(Math.random() * n);
+    turns += 5;
+    $('wheel').style.transform = 'rotate(' + (turns * 360 + (360 - (k * step + step / 2))) + 'deg)';
+    setTimeout(function(){
+      spinning = false; wheelResult = prizes[k][1];
+      $('wsay').textContent = 'The wheel has spoken: ' + wheelResult;
+      $('spin').disabled = false; $('spin').textContent = 'Spin again';
+      $('toScratch').hidden = false;
+    }, reduce ? 60 : 3350);
+  });
+
+  /* Certificate */
+  function add(ul, text){ var li = document.createElement('li'); li.textContent = text; ul.appendChild(li); }
+  function pardon(){
+    $('moodline').textContent = 'Royal mood: started at “' + moodNow() + '”, now officially smiling 😊';
+    var ul = $('owed'); ul.textContent = '';
+    options.forEach(function(text, i){ if (chosen[i]) add(ul, text.replace(', right now','')); });
+    var own = $('own').value.trim();
+    if (own) add(ul, '👑 Her Majesty’s own order: ' + own);
+    if (wheelResult) add(ul, '🎡 The wheel’s ruling: ' + wheelResult.replace(/^\S+\s/, ''));
+    if (!ul.children.length) add(ul, 'Nothing. Her Majesty showed mercy.');
+    add(ul, '🎟️ One Shree Coupon: any wish, valid once');
+    if (bonks > 0) add(ul, '🔨 Bonks already served: ' + bonks);
+    var d = new Date(), months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    $('certdate').textContent = 'Signed and sealed on ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    if (reduce) return;
+    var bits = ['👑','💗','✨','🌸','💕'];
+    for (var i=0;i<40;i++){
+      (function(i){
+        var s = document.createElement('span');
+        s.className = 'fall'; s.setAttribute('aria-hidden','true');
+        s.textContent = bits[i % bits.length];
+        s.style.left = (Math.random()*100) + 'vw';
+        s.style.animationDuration = (2.4 + Math.random()*2.2) + 's';
+        s.style.animationDelay = (Math.random()*1.2) + 's';
+        document.body.appendChild(s);
+        setTimeout(function(){ s.remove(); }, 6500);
+      })(i);
+    }
+  }
+
+  $('again').addEventListener('click', function(){
+    dodges = 0; var no = $('no'); delete no.dataset.done; no.textContent = 'No';
+    no.style.left = '50%'; no.style.top = '140px'; no.style.transform = 'translateX(-50%)';
+    $('yes').style.transform = 'translateX(-50%) scale(1)'; $('tease').textContent = '';
+    var c = $('foil'); c.style.display = ''; foilReady = false;
+    var fresh = c.cloneNode(false); c.parentNode.replaceChild(fresh, c);
+    $('reveal').hidden = false; $('toVerdict').hidden = true;
+    resetBonk(); buildHearts(); buildPicks(); resetQuiz(); resetWheel(); show(0);
+  });
+
+  paintMood(); resetBonk(); buildHearts(); buildPicks(); buildWheel(); resetQuiz(); resetWheel();
+})();
+</script>
+</body>
+</html>
